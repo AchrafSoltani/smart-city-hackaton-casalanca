@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Yui</title>
+    <link rel="stylesheet" href="css/framework7.ios.min.css">
+    <link rel="stylesheet" href="css/ionicons.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgXu5Z0Qhz15C6PpEKV8BQSymBi5TjCZc&callback=initMap"></script>
+    
+    <script>
+      // The following example creates complex markers to indicate beaches near
+      // Sydney, NSW, Australia. Note that the anchor is set to (0,32) to correspond
+      // to the base of the flagpole.
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: {lat: 33.5470773, lng:-7.6198393}
+        });
+
+        setMarkers(map);
+      }
+
+      /*var images = {
+        'hotel':'plate-fork-and-knife.png',
+        'resto':'hotel.png'
+      };*/
+
+      function setMarkers(map) {
+        
+
+        var beaches = [
+          ['Bondi Beach', 33.5470773,-7.6198393, 5],
+          ['Coogee Beach',33.5470773,-7.6198393, 4],
+          ['Cronulla Beach', 33.5470773, -7.6198393, 3],
+          ['Manly Beach', 33.5470773,-7.6198393, 2],
+          ['Maroubra Beach', 33.544099, -7.638537, 1]
+        ];
+        var shape = {
+          coords: [1, 1, 1, 20, 18, 20, 18, 1],
+          type: 'poly'
+        };
+        for (var i = 0; i < beaches.length; i++) {
+          var beach = beaches[i];
+          var marker = new google.maps.Marker({
+            position: {lat: beach[1], lng: beach[2]},
+            map: map,
+          //  icon: images[beach[3]],
+            shape: shape,
+            title: beach[0],
+            zIndex: beach[3]
+          });
+
+          marker.addListener('click', toggleBounce);
+        }
+      }
+
+      function toggleBounce() {
+        var isShow = document.getElementById('pop-up-maps').getAttribute("display");
+        if( isShow == "hide" )
+          isShow = "show";
+        else
+          isShow = "hide";
+        document.getElementById('pop-up-maps').setAttribute("display",isShow);
+        
+        /*if (marker.getAnimation() !== null) {
+          marker.setAnimation(null);
+        } else {
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+        }*/
+      }
+    </script>
+
+  </head>
+  <body class="color-theme-pink">
+    <!-- App root element -->
+    <div id="app">
+      <div class="views tabs">
+        
+        <style>
+          /* Always set the map height explicitly to define the size of the div
+           * element that contains the map. */
+          #map {
+            height: 90em;
+            width:100%;
+          }
+          .maps{
+  height: 90vh;
+  overflow: hidden !important;
+}
+.pop-up[display='show']{
+  position: static !important;
+  display: block !important;
+  z-index: 10000;
+}
+.pop-up .content{
+  width: 100% !important;
+  height: 90vh;
+}
+.pop-up .content .block{
+  background: #fff;
+  height: 300px;
+  width: 500px;
+  margin: 0 auto;
+  border: solid 1px #999;
+}
+.pop-up .content .block{
+  background: #fff;
+  height: 300px;
+  width: 500px;
+  margin: 0 auto;
+  padding: 0 !important;
+}
+.pop-up .content .block .title-container{
+  margin: 0 !important;
+  padding: 10px;
+  background: #f1f1f1;
+}
+.pop-up .content .block .buttons{
+  padding: 5%;
+}
+.pop-up .content .block .title-container button{
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  float: right;
+  text-align: center;
+  padding: 0%;
+  background: #555;
+  color: #fff;
+  border: none;
+  border-radius: 100%;
+  cursor: pointer;
+}
+        </style>
+
+        <div class="maps">
+          <div class="" id="map"></div>
+
+          <div id="pop-up-maps" class="view tab pop-up" display="hide">
+            <div data-name="categories" class="content page no-navbar">
+              <!-- Scrollable page content -->
+              <div class="page-content">
+                <div class="block">
+                  <div class="title-container">
+                    <span>Categories</span>
+                    <button onclick="toggleBounce()">X</button>
+                  </div>
+                  <style type="text/css">
+                    .buttons div.two-columns-cards{padding: 5px 0; } .pop-up .content .page-content{padding: 5%; } .pop-up .content{background: rgba(0,0,0,0.5); } 
+                  </style>
+                  <div class="buttons">
+                    <div class="two-columns-cards">
+                      <a href="https://xioyuna.com/category/" class="col button button-small button-round button-fill">See All</a>
+
+                      <a href="https://xioyuna.com/category/" class="col button button-small button-round button-fill">See All</a>
+                    </div>
+                    <div class="two-columns-cards">
+                      <a href="https://xioyuna.com/category/" class="col button button-small button-round button-fill">See All</a>
+
+                      <a href="https://xioyuna.com/category/" class="col button button-small button-round button-fill">See All</a>
+                    </div>
+                    <div class="two-columns-cards">
+                      <a href="https://xioyuna.com/category/" class="col button button-small button-round button-fill">See All</a>
+
+                      <a href="https://xioyuna.com/category/" class="col button button-small button-round button-fill">See All</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <script src="js/framework7.min.js"></script>
+    <script src="js/app_obf.js"></script>
+    
+  </body>
+
+</html>
