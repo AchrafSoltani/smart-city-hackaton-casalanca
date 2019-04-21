@@ -20,7 +20,7 @@
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 15,
-          center: {lat: 33.5470773, lng:-7.6198393}
+          center: {lat: 33.541220, lng: -7.640950}
         });
 
         setMarkers(map);
@@ -29,20 +29,21 @@
       var images = {
         'calendar':'img/map-icons/calendar.png',
         'community':'img/map-icons/community.png',
-        'eat':'img/map-icons/eat-1.png',
+        'eat':'img/map-icons/eat.png',
         'live-chat':'img/map-icons/live-chat.png',
-        'shop':'img/map-icons/shop.png'
+        'shop':'img/map-icons/shop.png',
+        'shop-gadget':'img/map-icons/shop-gadget.png'
       };
 
       function setMarkers(map) {
         
 
         var beaches = [
-          ['Bondi Beach', 33.5470773,-7.6198393, 'calendar'],
-          ['Coogee Beach',33.5470773,-7.6198393, 'community'],
-          ['Cronulla Beach', 33.5470773, -7.6198393, 'eat'],
-          ['Manly Beach', 33.5470773,-7.6198393, 'live-chat'],
-          ['Maroubra Beach', 33.544099, -7.638537, 'shop']
+          ['Bondi Beach', 33.541448, -7.639200, 'calendar'],
+          ['Coogee Beach',33.541435, -7.639946, 'community'],
+          ['Cronulla Beach', 33.541296, -7.639753, 'eat'],
+          ['Manly Beach', 33.541005, -7.640306, 'shop-gadget'],
+          ['Maroubra Beach', 33.541220, -7.640950, 'shop']
         ];
         var shape = {
           coords: [1, 1, 1, 20, 18, 20, 18, 1],
@@ -59,11 +60,8 @@
             zIndex: i+1
           });
 
-          marker.addListener('click', toggleBounce);
-        }
-      }
-
-      function toggleBounce() {
+          marker.addListener('click', function toggleBounce() {
+        console.log(marker);
         var isShow = document.getElementById('pop-up-maps').getAttribute("display");
         if( isShow == "hide" )
           isShow = "show";
@@ -76,7 +74,19 @@
         } else {
           marker.setAnimation(google.maps.Animation.BOUNCE);
         }*/
+      });
+        }
+      } 
+      function toggleBounce() {
+        var isShow = document.getElementById('pop-up-maps').getAttribute("display");
+        if( isShow == "hide" )
+          isShow = "show";
+        else
+          isShow = "hide";
+        document.getElementById('pop-up-maps').setAttribute("display",isShow);
       }
+
+
     </script>
   </head>
   <body class="color-theme-pink">
@@ -86,8 +96,160 @@
         <!-- Main view -->
         <div id="view-today" class="view view-main tab tab-active">          
           <style>
-            #map {height: 100em; width:100%; } .maps {overflow: hidden !important; } .pop-up[display='show'] {position: static !important; display: block !important; z-index: 10000; } .pop-up .content {width: 100% !important; } .pop-up .content .block {background: #fff; height: 300px; width: 500px; margin: 0 auto; border: solid 1px #999; } .pop-up .content .block {background: #fff; height: 300px; width: 500px; margin: 0 auto; padding: 0 !important; } .pop-up .content .block .title-container {margin: 0 !important; padding: 10px; background: #f1f1f1; } .pop-up .content .block .buttons {padding: 5%; } .pop-up .content .block .title-container button {display: inline-block; width: 22px; height: 22px; float: right; text-align: center; padding: 0%; background: #555; color: #fff; border: none; border-radius: 100%; cursor: pointer;}
+
+
+#map {
+  height: 100em; width:100%; 
+} 
+.maps {
+  overflow: hidden !important;
+} 
+.pop-up[display='show'] {
+  position: static !important; 
+  display: block !important; 
+  z-index: 10000 !important; } 
+.pop-up .content {
+  width: 100% !important; 
+} 
+.pop-up .content .block {
+  background: #fff; 
+  max-width: 500px; 
+  margin: 0 auto; 
+  border: solid 1px #999; 
+} 
+.pop-up .content .block {
+  background: #fff; 
+  max-width: 500px; margin: 0 auto; padding: 0 !important; } 
+.pop-up .content .block .title-container {
+  margin: 0 !important; padding: 10px; 
+  background: #f1f1f1; } 
+.pop-up .content .block .buttons {padding: 5%; } 
+.pop-up .content .block .title-container button {
+  display: inline-block; width: 22px; height: 22px; 
+  float: right; text-align: center; padding: 0%; 
+  background: #555; color: #fff; border: none; border-radius: 100%; 
+  cursor: pointer;}
+
+#top-nav{
+  position: absolute;
+  width: 100%;
+  background: transparent;
+  z-index: 10;
+}
+#top-nav .container{
+  padding: 4px 10px 10px 10px;
+}
+#top-nav .container form{
+  background: transparent;
+}
+#top-nav .container form input{
+  background: #ffff;
+  height: 40px;
+  border-radius: 0;
+  border: solid 1px #ccc;
+}
+#top-nav .container form .input-clear-button{
+  padding: 8px 5px 0 0 ;
+}
+#top-nav .container form .searchbar-icon{
+  padding: 8px 5px 0 0 ;
+}
+#top-nav .container .categ{
+  background-color: #fff;
+  border: solid 1px #ccc;
+}
+#top-nav .container .categ ul{
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+#top-nav .container .categ ul li{
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+}
+#top-nav .container .categ a{
+  background-color: #fff;
+  height: 70px;
+  width: 100%;
+  display: inline-block;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#top-nav .container .categ span{
+  font-weight: bold;
+}
+#top-nav .container .categ a.food{
+  background-image: url('img/map-icons/top-bar/food.png');
+}
+#top-nav .container .categ a.service{
+  background-image: url('img/map-icons/top-bar/services.png');
+}
+#top-nav .container .categ a.event{
+  background-image: url('img/map-icons/top-bar/event.png');
+}
+#top-nav .container .categ a.social{
+  background-image: url('img/map-icons/top-bar/social.png');
+}
+
+.buttons div.two-columns-cards{padding: 5px 0; } 
+.pop-up .content .page-content{padding: 5%; } 
+.pop-up .content{background: rgba(0,0,0,0.5);z-index: 100 !important; }
+.buttons .profile{text-align: center; } 
+.buttons .profile img{width: 100px; 
+  height: 100px; border-radius: 100%; 
+  display: inline-block; } 
+.buttons .profile h2{margin: 10px 0 15px 0; }
+.buttons ul{list-style: none; 
+  padding: 0; text-align: center } 
+.buttons ul li{display: inline-block; 
+  margin: 5px; } 
+.buttons ul li a{display: block; 
+  border: solid 1px #ccc; color: #555 !important; 
+  padding: 10px; border-radius: 100%; width: 50px; height:50px; 
+  text-align: center; } 
+.buttons ul li a:hover{background: #24389b; 
+  color: #fff !important; } 
+.buttons ul li a i{display: block; font-size: 1.5em; }
+            
             </style>
+            <div id="top-nav">
+              <div class="container">
+                <form class="searchbar">
+                  <div class="searchbar-inner">
+                    <div class="searchbar-input-wrap">
+                      <input type="search" placeholder="Search">
+                      <i class="searchbar-icon"></i>
+                      <span class="input-clear-button"></span>
+                    </div>
+                    <span class="searchbar-disable-button">Cancel</span>
+                  </div>
+                </form>
+                <div class="categ">
+                  <ul>
+                    <li>
+                      <a href="#" class="food"></a>
+                      <span>Food</span>                      
+                    </li>
+                    <li>
+                      <a href="#" class="service"></a>
+                      <span>Services</span>                      
+                    </li>
+                    <li>
+                      <a href="#" class="event"></a>
+                      <span>Events</span>
+                    </li>
+                    <li>
+                      <a href="#" class="social"></a>
+                      <span>Social</span>
+                    </li>
+                  </ul>
+                  
+                  
+                </div>
+              </div>
+            </div>
           <div class="maps">
             <div class="" id="map"></div>
 
@@ -97,27 +259,41 @@
                 <div class="page-content">
                   <div class="block">
                     <div class="title-container">
-                      <span>Categories</span>
+                      <span>Infomations</span>
                       <button onclick="toggleBounce()">X</button>
                     </div>
-                    <style type="text/css">
-                      .buttons div.two-columns-cards{padding: 5px 0; } .pop-up .content .page-content{padding: 5%; } .pop-up .content{background: rgba(0,0,0,0.5); } 
-                    </style>
                     <div class="buttons">
-                      <div class="two-columns-cards">
-                        <a href="https://xioyuna.com/category/" class="col button button-small button-round button-fill">See All</a>
-
-                        <a href="https://xioyuna.com/category/" class="col button button-small button-round button-fill">See All</a>
+                      <div class="profile">
+                        <img src="img/pop-up/BIM.png">
+                        <h2>BIM - Shop</h2>
                       </div>
-                      <div class="two-columns-cards">
-                        <a href="https://xioyuna.com/category/" class="col button button-small button-round button-fill">See All</a>
-
-                        <a href="https://xioyuna.com/category/" class="col button button-small button-round button-fill">See All</a>
-                      </div>
-                      <div class="two-columns-cards">
-                        <a href="https://xioyuna.com/category/" class="col button button-small button-round button-fill">See All</a>
-
-                        <a href="https://xioyuna.com/category/" class="col button button-small button-round button-fill">See All</a>
+                      <div class="menu">
+                        <ul>
+                          <li>
+                            <a href="#" class="info">
+                              <i class="icon ion-ios-information-circle-outline"></i>
+                              Info
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" class="info">
+                              <i class="icon ion-ios-cart"></i>
+                              Shop
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" class="info">
+                              <i class="icon ion-ios-chatboxes"></i>
+                              Chat
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" class="info">
+                              <i class="icon ion-ios-megaphone"></i>
+                              Kal
+                            </a>
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>
