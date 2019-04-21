@@ -10,294 +10,143 @@
     <link rel="stylesheet" href="css/framework7.ios.min.css">
     <link rel="stylesheet" href="css/ionicons.css">
     <link rel="stylesheet" href="css/style.css">
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgXu5Z0Qhz15C6PpEKV8BQSymBi5TjCZc&callback=initMap"></script>
-    
-    <script>
-      // The following example creates complex markers to indicate beaches near
-      // Sydney, NSW, Australia. Note that the anchor is set to (0,32) to correspond
-      // to the base of the flagpole.
-
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: {lat: 33.541220, lng: -7.640950}
-        });
-
-        setMarkers(map);
-      }
-
-      var images = {
-        'calendar':'img/map-icons/calendar.png',
-        'community':'img/map-icons/community.png',
-        'eat':'img/map-icons/eat.png',
-        'live-chat':'img/map-icons/live-chat.png',
-        'shop':'img/map-icons/shop.png',
-        'shop-gadget':'img/map-icons/shop-gadget.png'
-      };
-
-      function setMarkers(map) {
-        
-
-        var beaches = [
-          ['Bondi Beach', 33.541448, -7.639200, 'calendar'],
-          ['Coogee Beach',33.541435, -7.639946, 'community'],
-          ['Cronulla Beach', 33.541296, -7.639753, 'eat'],
-          ['Manly Beach', 33.541005, -7.640306, 'shop-gadget'],
-          ['Maroubra Beach', 33.541220, -7.640950, 'shop']
-        ];
-        var shape = {
-          coords: [1, 1, 1, 20, 18, 20, 18, 1],
-          type: 'poly'
-        };
-        for (var i = 0; i < beaches.length; i++) {
-          var beach = beaches[i];
-          var marker = new google.maps.Marker({
-            position: {lat: beach[1], lng: beach[2]},
-            map: map,
-            icon: images[beach[3]],
-            shape: shape,
-            title: beach[0],
-            zIndex: i+1
-          });
-
-          marker.addListener('click', function toggleBounce() {
-        console.log(marker);
-        var isShow = document.getElementById('pop-up-maps').getAttribute("display");
-        if( isShow == "hide" )
-          isShow = "show";
-        else
-          isShow = "hide";
-        document.getElementById('pop-up-maps').setAttribute("display",isShow);
-        
-        /*if (marker.getAnimation() !== null) {
-          marker.setAnimation(null);
-        } else {
-          marker.setAnimation(google.maps.Animation.BOUNCE);
-        }*/
-      });
-        }
-      } 
-      function toggleBounce() {
-        var isShow = document.getElementById('pop-up-maps').getAttribute("display");
-        if( isShow == "hide" )
-          isShow = "show";
-        else
-          isShow = "hide";
-        document.getElementById('pop-up-maps').setAttribute("display",isShow);
-      }
-
-
-    </script>
   </head>
   <body class="color-theme-pink">
     <!-- App root element -->
     <div id="app">
       <div class="views tabs">
         <!-- Main view -->
-        <div id="view-today" class="view view-main tab tab-active">          
-          <style>
-
-
-#map {
-  height: 100em; width:100%; 
-} 
-.maps {
-  overflow: hidden !important;
-} 
-.pop-up[display='show'] {
-  position: static !important; 
-  display: block !important; 
-  z-index: 10000 !important; } 
-.pop-up .content {
-  width: 100% !important; 
-} 
-.pop-up .content .block {
-  background: #fff; 
-  max-width: 500px; 
-  margin: 0 auto; 
-  border: solid 1px #999; 
-} 
-.pop-up .content .block {
-  background: #fff; 
-  max-width: 500px; margin: 0 auto; padding: 0 !important; } 
-.pop-up .content .block .title-container {
-  margin: 0 !important; padding: 10px; 
-  background: #f1f1f1; } 
-.pop-up .content .block .buttons {padding: 5%; } 
-.pop-up .content .block .title-container button {
-  display: inline-block; width: 22px; height: 22px; 
-  float: right; text-align: center; padding: 0%; 
-  background: #555; color: #fff; border: none; border-radius: 100%; 
-  cursor: pointer;}
-
-#top-nav{
-  position: absolute;
-  width: 100%;
-  background: transparent;
-  z-index: 10;
-}
-#top-nav .container{
-  padding: 4px 10px 10px 10px;
-}
-#top-nav .container form{
-  background: transparent;
-}
-#top-nav .container form input{
-  background: #ffff;
-  height: 40px;
-  border-radius: 0;
-  border: solid 1px #ccc;
-}
-#top-nav .container form .input-clear-button{
-  padding: 8px 5px 0 0 ;
-}
-#top-nav .container form .searchbar-icon{
-  padding: 8px 5px 0 0 ;
-}
-#top-nav .container .categ{
-  background-color: #fff;
-  border: solid 1px #ccc;
-}
-#top-nav .container .categ ul{
-  list-style: none;
-  padding: 0;
-  display: flex;
-}
-#top-nav .container .categ ul li{
-  display: inline-block;
-  width: 25%;
-  text-align: center;
-}
-#top-nav .container .categ a{
-  background-color: #fff;
-  height: 70px;
-  width: 100%;
-  display: inline-block;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-#top-nav .container .categ span{
-  font-weight: bold;
-}
-#top-nav .container .categ a.food{
-  background-image: url('img/map-icons/top-bar/food.png');
-}
-#top-nav .container .categ a.service{
-  background-image: url('img/map-icons/top-bar/services.png');
-}
-#top-nav .container .categ a.event{
-  background-image: url('img/map-icons/top-bar/event.png');
-}
-#top-nav .container .categ a.social{
-  background-image: url('img/map-icons/top-bar/social.png');
-}
-
-.buttons div.two-columns-cards{padding: 5px 0; } 
-.pop-up .content .page-content{padding: 5%; } 
-.pop-up .content{background: rgba(0,0,0,0.5);z-index: 100 !important; }
-.buttons .profile{text-align: center; } 
-.buttons .profile img{width: 100px; 
-  height: 100px; border-radius: 100%; 
-  display: inline-block; } 
-.buttons .profile h2{margin: 10px 0 15px 0; }
-.buttons ul{list-style: none; 
-  padding: 0; text-align: center } 
-.buttons ul li{display: inline-block; 
-  margin: 5px; } 
-.buttons ul li a{display: block; 
-  border: solid 1px #ccc; color: #555 !important; 
-  padding: 10px; border-radius: 100%; width: 50px; height:50px; 
-  text-align: center; } 
-.buttons ul li a:hover{background: #24389b; 
-  color: #fff !important; } 
-.buttons ul li a i{display: block; font-size: 1.5em; }
-            
-            </style>
-            <div id="top-nav">
-              <div class="container">
-                <form class="searchbar">
-                  <div class="searchbar-inner">
-                    <div class="searchbar-input-wrap">
-                      <input type="search" placeholder="Search">
-                      <i class="searchbar-icon"></i>
-                      <span class="input-clear-button"></span>
-                    </div>
-                    <span class="searchbar-disable-button">Cancel</span>
-                  </div>
-                </form>
-                <div class="categ">
-                  <ul>
-                    <li>
-                      <a href="#" class="food"></a>
-                      <span>Food</span>                      
-                    </li>
-                    <li>
-                      <a href="#" class="service"></a>
-                      <span>Services</span>                      
-                    </li>
-                    <li>
-                      <a href="#" class="event"></a>
-                      <span>Events</span>
-                    </li>
-                    <li>
-                      <a href="#" class="social"></a>
-                      <span>Social</span>
-                    </li>
+        <div id="view-today" class="view view-main tab tab-active">
+          <div data-name="home" class="page no-navbar">
+            <!-- Scrollable page content -->
+            <div class="page-content ptr-content infinite-scroll-content" data-infinite-distance="70">
+          <!--    <div class="ptr-preloader">
+                <div class="preloader"></div>
+                <div class="ptr-arrow"></div>
+              </div> -->
+              <div class="block" id="today-content">
+               
+                <ul class="popular-tags">
+                    <li ><a href="#" class="link" id="col" ><span>   feed</span></a></li>
+                    <li ><a href="#" class="link " style="margin-left: -4px"><span>   media</span></i></a></li>
+                    <li><a href="#" class="link"><span>   shop</span></a></li>
+                    <li><a href="#" class="link"><span>   news</span></a></li>
                   </ul>
-                  
-                  
-                </div>
-              </div>
-            </div>
-          <div class="maps">
-            <div class="" id="map"></div>
-
-            <div id="pop-up-maps" class="view tab pop-up" display="hide">
-              <div data-name="categories" class="content page no-navbar">
-                <!-- Scrollable page content -->
-                <div class="page-content">
-                  <div class="block">
-                    <div class="title-container">
-                      <span>Infomations</span>
-                      <button onclick="toggleBounce()">X</button>
-                    </div>
-                    <div class="buttons">
-                      <div class="profile">
-                        <img src="img/pop-up/BIM.png">
-                        <h2>BIM - Shop</h2>
-                      </div>
-                      <div class="menu">
-                        <ul>
-                          <li>
-                            <a href="#" class="info">
-                              <i class="icon ion-ios-information-circle-outline"></i>
-                              Info
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#" class="info">
-                              <i class="icon ion-ios-cart"></i>
-                              Shop
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#" class="info">
-                              <i class="icon ion-ios-chatboxes"></i>
-                              Chat
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#" class="info">
-                              <i class="icon ion-ios-megaphone"></i>
-                              Kal
-                            </a>
-                          </li>
-                        </ul>
+                  <p class="time">Now</p>
+                <a href="https://xioyuna.com/single/">
+                  <div class="card">
+                    <img class="card-image" src="img/thumb-1.jpg" alt="">
+                    <div class="card-infos">
+                      <div class="chip color-pink"><i class="icon ion-ios-flame"></i>Hot</div>
+                      <h2 class="card-title">Soprano Announces His New Album</h2>
+                      <div class="card-bottom">
+                        <div class="card-author">
+                          <img class="card-author-image" src="img/authors/author-7.jpg" alt="">
+                          <div>Elena Anka</div>
+                        </div>
+                        <div class="card-comments"><i class="icon ion-ios-text"></i>22</div>
                       </div>
                     </div>
                   </div>
+                </a>
+                <p class="time">At 9:00 pm</p>
+                <a href="https://xioyuna.com/single/">
+                  <div class="card card-style-2" style="background-color: black;color: white">
+                    
+                        <div class="card-infos">
+                         <img class="card-author-image1" src="icon1.jpg" alt="">
+                          <div style="color:red;font-weight: bold;font-size:17px">Bim Rabat</div>
+                         <div class="card-infos">
+                     Découvrez chez BIM tous les produits essentiels pour le mois de Ramadan à partir du 19 Avril 2019
+profitez des meilleurs offres ramadan 2019 avec bim : 
+
+Service à soupe en potrie de safi prix à 139,90 Dh
+Assieste en potrie de safi prix à 59,90 Dh
+Service à soupe 15 pièces pix à 149,90 Dh
+Cocotte en aluminuim prix à 220,00 Dh
+Four electrique prix à 750 Dh
+ Crêpière électrique prix à 174,90 Dh
+Batteur électrique prix à 99,90 Dh
+
+
+                    </div>
+                    </div>
+                    </div>
+                   </div>
+                </a>
+                <p class="time">At 8:45 pm</p>
+                <a href="https://xioyuna.com/single/">
+                  <div class="card">
+                    <iframe style="margin-top:0px" class="card-image" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe>
+                    <div class="card-infos">
+                      <div class="card-bottom">
+                        <div class="card-author">
+                          <img class="card-author-image" src="hacklogo.png" alt="">
+                          <div>Hackathon event</div>
+                        </div>
+                       
+                      </div>
+                    </div>
+                  </div>
+                </a>
+
+                
+              
+                  </a>
                 </div>
+                <div class="title-container">
+                  <span class="title-date">17 March</span>
+                  <h1>Sunday</h1>
+                </div>
+                <a href="https://xioyuna.com/single/">
+                  <div class="card medium">
+                    <img class="card-image" src="img/thumb-10.jpg" alt="">
+                    <div class="card-infos">
+                      <div class="card-date"><i class="icon ion-md-time"></i>2 days ago</div>
+                      <h2 class="card-title">Booba on Fire in His New Gotham Clip</h2>
+                    </div>
+                  </div>
+                </a>
+                <ul class="list media-list post-list" id="infinite-content">
+                  <li>
+                    <a href="https://xioyuna.com/single/">
+                      <div class="item-content">
+                        <div class="item-media"><img src="img/thumb-11.jpg" alt=""></div>
+                        <div class="item-inner">
+                          <div class="item-subtitle">Fashion</div>
+                          <div class="item-title">The 6th Edition of the Body Painting Contest</div>
+                          <div class="item-subtitle bottom-subtitle"><img src="img/authors/author-7.jpg" alt="">Elena Anka</div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://xioyuna.com/single/">
+                      <div class="item-content">
+                        <div class="item-media"><img src="img/thumb-12.jpg" alt=""></div>
+                        <div class="item-inner">
+                          <div class="item-subtitle">Photography</div>
+                          <div class="item-title">20 Photography Tips for Taking Pictures</div>
+                          <div class="item-subtitle bottom-subtitle"><img src="img/authors/author-3.jpg" alt="">Jess Roxana</div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://xioyuna.com/single/">
+                      <div class="item-content">
+                        <div class="item-media"><img src="img/thumb-13.jpg" alt=""></div>
+                        <div class="item-inner">
+                          <div class="item-subtitle">Beatles</div>
+                          <div class="item-title">Tottenham: NFL Turf Is in Place!</div>
+                          <div class="item-subtitle bottom-subtitle"><img src="img/authors/author-1.jpg" alt="">Camille Aline</div>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+                <div class="preloader infinite-scroll-preloader"></div>
               </div>
             </div>
           </div>
@@ -309,46 +158,39 @@
             <div class="page-content">
               <div class="block">
                 <div class="title-container">
-                  <h1>Mini Apps</h1>
+                  <h1>Categories</h1>
                 </div>
                 <div class="categories-container">
-
-                  <a href="/category/">
-                    <div class="category card" style="background-image: url('img/miniapp/gaming.jpg'); box-shadow: 0px 15px 20px -10px rgba(37, 57, 155, 0.5);">
-                      <h2>Gaming</h2>
-                    </div>
-                  </a>
-
                   <a href="https://xioyuna.com/category/">
-                    <div class="category card" style="background-image: url('img/miniapp/music.jpg'); box-shadow: 0px 15px 20px -10px rgba(231, 0, 70, 0.5);">
-                      <h2>Music</h2>
-                    </div>
-                  </a>
-
-                  <a href="https://xioyuna.com/category/">
-                    <div class="category card" style="background-image: url('img/miniapp/education.jpg'); box-shadow: 0px 15px 20px -10px rgba(252, 186, 47, 0.5);">
-                      <h2>Education</h2>
-                    </div>
-                  </a>
-
-                  <a href="https://xioyuna.com/category/">
-                    <div class="category card" style="background-image: url('img/miniapp/lifestyle.jpg'); box-shadow: 0px 15px 20px -10px rgba(128, 213, 250, 0.5);">
-                      <h2>Lifestyle</h2>
-                    </div>
-                  </a>
-
-                  <a href="https://xioyuna.com/category/">
-                    <div class="category card" style="background-image: url('img/miniapp/business.jpg'); box-shadow: 0px 15px 20px -10px rgba(37, 227, 154, 0.5);">
-                      <h2>Business</h2>
-                    </div>
-                  </a>
-
-                  <a href="https://xioyuna.com/category/">
-                    <div class="category card" style="background-image: url('img/miniapp/sports.jpg'); box-shadow: 0px 15px 20px -10px rgba(255, 128, 169, 0.5);">
+                    <div class="category card" style="background-image: url('img/categories/sports.jpg'); box-shadow: 0px 15px 20px -10px rgba(252, 186, 47, 0.5);">
                       <h2>Sports</h2>
                     </div>
                   </a>
-
+                  <a href="https://xioyuna.com/category/">
+                    <div class="category card" style="background-image: url('img/categories/travel.jpg'); box-shadow: 0px 15px 20px -10px rgba(128, 213, 250, 0.5);">
+                      <h2>Travel</h2>
+                    </div>
+                  </a>
+                  <a href="https://xioyuna.com/category/">
+                    <div class="category card" style="background-image: url('img/categories/music.jpg'); box-shadow: 0px 15px 20px -10px rgba(231, 0, 70, 0.5);">
+                      <h2>Music</h2>
+                    </div>
+                  </a>
+                  <a href="https://xioyuna.com/category/">
+                    <div class="category card" style="background-image: url('img/categories/gaming.jpg'); box-shadow: 0px 15px 20px -10px rgba(37, 57, 155, 0.5);">
+                      <h2>Gaming</h2>
+                    </div>
+                  </a>
+                  <a href="https://xioyuna.com/category/">
+                    <div class="category card" style="background-image: url('img/categories/photography.jpg'); box-shadow: 0px 15px 20px -10px rgba(37, 227, 154, 0.5);">
+                      <h2>Photo</h2>
+                    </div>
+                  </a>
+                  <a href="https://xioyuna.com/category/">
+                    <div class="category card" style="background-image: url('img/categories/food.jpg'); box-shadow: 0px 15px 20px -10px rgba(255, 128, 169, 0.5);">
+                      <h2>Food</h2>
+                    </div>
+                  </a>
                 </div>
                 <div class="title-container">
                   <span class="title-date">Recent posts</span>
@@ -929,8 +771,8 @@
                     <div class="item-content item-themes">
                       <label class="radio color-white"><input type="radio" name="radio-color-theme" id="color-theme-red"><i class="icon-radio bg-color-red"></i></label>
                       <label class="radio color-white"><input type="radio" name="radio-color-theme" id="color-theme-green"><i class="icon-radio bg-color-green"></i></label>
-                      <label class="radio color-white"><input type="radio" name="radio-color-theme" id="color-theme-blue" checked><i class="icon-radio bg-color-blue"></i></label>
-                      <label class="radio color-white"><input type="radio" name="radio-color-theme" id="color-theme-pink" ><i class="icon-radio bg-color-pink"></i></label>
+                      <label class="radio color-white"><input type="radio" name="radio-color-theme" id="color-theme-blue"><i class="icon-radio bg-color-blue"></i></label>
+                      <label class="radio color-white"><input type="radio" name="radio-color-theme" id="color-theme-pink" checked><i class="icon-radio bg-color-pink"></i></label>
                       <label class="radio color-white"><input type="radio" name="radio-color-theme" id="color-theme-yellow"><i class="icon-radio bg-color-yellow"></i></label>
                       <label class="radio color-white"><input type="radio" name="radio-color-theme" id="color-theme-orange"><i class="icon-radio bg-color-orange"></i></label>
                       <label class="radio color-white"><input type="radio" name="radio-color-theme" id="color-theme-gray"><i class="icon-radio bg-color-gray"></i></label>
@@ -1229,20 +1071,24 @@
         <div class="toolbar tabbar tabbar-labels">
           <div class="toolbar-inner">
             <a href="#view-today" class="tab-link tab-link-active">
-              <i class="icon ion-ios-map"></i>
-              <span class="tabbar-label">Nearby</span>
-            </a>
-            <a href="#view-search" class="tab-link">
-              <i class="icon ion-ios-megaphone"></i>
-              <span class="tabbar-label">Kal</span>
+              <i class="icon ion-ios-today"></i>
+              <span class="tabbar-label">Today</span>
             </a>
             <a href="#view-categories" class="tab-link">
               <i class="icon ion-ios-apps"></i>
-              <span class="tabbar-label">Mini Apps</span>
+              <span class="tabbar-label">Categories</span>
+            </a>
+            <a href="#view-discover" class="tab-link">
+              <i class="icon ion-ios-star"></i>
+              <span class="tabbar-label">Discover</span>
+            </a>
+            <a href="#view-search" class="tab-link">
+              <i class="icon ion-ios-search"></i>
+              <span class="tabbar-label">Search</span>
             </a>
             <a href="#view-pages" class="tab-link">
-              <i class="icon ion-ios-person"></i>
-              <span class="tabbar-label">Profile</span>
+              <i class="icon ion-ios-albums"></i>
+              <span class="tabbar-label">Pages</span>
             </a>
           </div>
         </div>
