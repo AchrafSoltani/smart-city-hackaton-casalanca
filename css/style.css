@@ -1442,3 +1442,26 @@ iframe, video {
 		height: 350px;
 	}
 }
+
+#gamepopup{
+		background-color:#000000a8;
+	height:100vh;
+	width :100%;
+	position:absolute;
+		z-index:10000;
+		top:0;
+		padding: 5%;
+		display: none;
+
+}
+#gamepopup[display="show"]{
+		display: block;
+
+}
+
+#gamepopup iframe{
+		background-color:white;
+	height:90vh;
+	width :90%;
+
+}
